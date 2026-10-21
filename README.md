@@ -37,6 +37,14 @@ Sigue `PRUEBA-CON-MOVILES.md`: volumen al 80-90 %, móviles quietos, 5 repeticio
 4. Descomprime el zip y copia el `.apk` al móvil (o `adb install app-release-signed.apk`). Hay que permitir «instalar apps de origen desconocido».
 5. Para que el APK abra sin la barra del navegador, sube el `assetlinks.json` del zip a `/.well-known/` del dominio raíz (`perezamadorluisenrique-gif.github.io`). Sin él funciona igual, con una barra arriba.
 
+### APK local sin PWABuilder
+
+`android/build.sh` empaqueta `dist/` en un APK que funciona sin conexión (WebView con el micrófono permitido; firmado con una clave de depuración local). Necesita un JDK y el SDK de Android (`platforms;android-34`, `build-tools;34.0.0`) en `ANDROID_HOME`:
+
+```bash
+node tools/build-app.ts && ANDROID_HOME=/ruta/al/sdk android/build.sh   # deja silbo.apk en la raíz
+```
+
 ## Construir y desarrollar
 
 ```bash
