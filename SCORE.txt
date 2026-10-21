@@ -1,0 +1,94 @@
+# score — 2026-10-21T06:04:41.837Z
+Todas las cifras son contra el simulador de canal acústico (src/sim), no con móviles reales.
+
+## R0: simulador y módem de referencia
+- [x] sala small: RT60 medido 0.31 s (pedido 0.3), DRR 6.0 dB (pedido 6)
+- [x] sala medium: RT60 medido 0.60 s (pedido 0.6), DRR 3.0 dB (pedido 3)
+- [x] sala large: RT60 medido 1.00 s (pedido 1), DRR -0.0 dB (pedido 0)
+- [x] SNR 5 dB: medido 5.00 dB en 500-8000 Hz
+- [x] SNR 15 dB: medido 14.97 dB en 500-8000 Hz
+- [x] SNR 25 dB: medido 24.97 dB en 500-8000 Hz
+- [x] deriva -200 ppm: medida -199.7 ppm
+- [x] deriva 200 ppm: medida 199.7 ppm
+- [x] saturación no: 0.0 % de muestras recortadas
+- [x] saturación sí: 38.9 % de muestras recortadas
+- [x] control automático de ganancia: nivel de salida -20.0 / -20.0 dBFS con entradas a 0 y -40 dB
+- FSK binaria 50 baudios (referencia): sin sala, SNR 25 dB: 20/20 (100.0 %); sala media (RT60 0,6 s, DRR +3 dB), SNR 15 dB: 1/20 (5.0 %); tasa útil 43 bit/s, 6.5 s por mensaje de 35 bytes
+R0: CUMPLE
+
+## R1: texto de 140 caracteres
+- MFSK con saltos, perfil «rápido»: sala media (RT60 0,6 s, DRR +3 dB), SNR 15 dB, deriva aleatoria ±200 ppm: 200/200 íntegros por SHA-256 (100.0 %)
+- mensaje medio 156 bytes UTF-8, 2.73 s de sonido por mensaje, tasa útil 456 bit/s
+R1: CUMPLE (umbral 99 % de 200)
+
+## R2: robustez
+- MFSK con saltos, perfil «robusto», texto de 140 caracteres: rejilla de 90 condiciones × 10 mensajes
+  (SNR 5-25 dB × salas pequeña/media/grande × deriva −200/0/+200 ppm × saturación no/sí)
+- global: 900/900 íntegros por SHA-256 (100.0 %); peor condición 100 %
+  - por SNR: 5 dB 180/180 · 10 dB 180/180 · 15 dB 180/180 · 20 dB 180/180 · 25 dB 180/180
+  - por sala: small 300/300 · medium 300/300 · large 300/300
+  - con saturación 450/450, sin 450/450; deriva −200 300/300, 0 300/300, +200 300/300
+- tiempo por mensaje 4.41 s, tasa útil 282 bit/s
+- falsos positivos: 10 min de ambiente simulado (voces, música, pitidos, silbidos que barren, clics, golpes; sala media, mitad con saturación): 0 tramas decodificadas, 8 candidatos del detector de chirp por encima de su umbral 0.15 (NCC máxima 0.18), todos descartados por las comprobaciones de la cabecera
+- control positivo: con una trama real mezclada a 0 dB en cada minuto, decodificada en 10/10
+R2: CUMPLE (≥95 % global, ninguna condición <8/10, 0 tramas falsas, control ≥9/10)
+
+## R3: foto de 10 KB
+- foto JPEG de 10075 bytes en trozos de 1500 bytes, perfil «archivo» (OFDM con DQPSK diferencial, Viterbi), en carrusel (los trozos perdidos llegan en la vuelta siguiente)
+- sala media (RT60 0,6 s, DRR +3 dB), SNR 15 dB, deriva aleatoria ±200 ppm: completa e idéntica por SHA-256 en ≤60 s en 20/20 ensayos (100.0 %); a la primera vuelta en 20/20
+- tiempo hasta tener la foto: mediana 36.0 s, máximo 36.0 s; tasa útil 2241 bit/s
+- tramas decodificadas 260/260 (incluye las repeticiones del carrusel)
+R3: CUMPLE (≥19/20 en ≤60 s)
+
+## R4: app (PWA) de punta a punta en Chromium
+- [x] viewport de móvil (390×844): botones Enviar 173×96 y Recibir 173×96 px; sin scroll horizontal: true
+- [x] manifest de PWA: «Silbo: mensajes por sonido», display standalone, iconos any 192x192 512x512
+- [x] dos botones grandes: Enviar y Recibir: 🔊 Enviar / 👂 Recibir
+- [x] axe-core pantalla inicial: infracciones serious/critical: 0; todas: ninguna
+- [x] axe-core pantalla Enviar: infracciones serious/critical: 0; todas: ninguna
+- [x] emisor (texto) genera sonido: 4.4 s por vuelta; estado: «Sonando el mensaje…»
+- [x] emisor (foto) genera sonido: 36.2 s por vuelta; estado: «Sonando 7 trozos en bucle. Pulsa Parar cuando el otro móvil lo tenga.»
+- [x] funciona sin conexión (service worker): sin red: título «Silbo · mensajes por sonido», controlada por el service worker: true, recursos en caché: 4/4
+- [x] emisor (texto) genera sonido: 4.4 s por vuelta; estado: «Sonando el mensaje…»
+- [x] sin conexión el emisor sigue sonando: 4.4 s
+- [x] axe-core pantalla Recibir: infracciones serious/critical: 0; todas: ninguna
+- [x] espectrograma dibuja el sonido recibido: 34.6 % de píxeles encendidos
+- [x] texto de 140 caracteres recibido íntegro: idéntico (SHA-256 8be1243b523e), en pantalla a los 5.9 s; contexto de audio 48000 Hz, 4 ventanas, última decodificación 144 ms
+- [x] foto JPEG de 10 KB recibida íntegra: idéntica por SHA-256, 320×240 px, «Foto recibida: foto.jpg», en pantalla a los 38.2 s de pulsar Recibir; barra de progreso al final 1
+- [x] barra de progreso avanza durante la recepción: máximo visto 1.00
+R4: CUMPLE (todas las comprobaciones de tests/e2e/run.ts)
+
+## R5: modo difusión y modo discreto
+- [x] difusión: 10 emisiones de la foto de 10 KB en carrusel, 6 receptores simulados a la vez en cada una (misma sala, cada uno en su sitio: su respuesta al impulso, SNR 10-25 dB, deriva ±200 ppm, 30 % con saturación, se encienden en un momento al azar de los primeros 30 s); foto completa e idéntica por SHA-256 en ≤60 s desde que se encienden: 60/60 (100.0 %); sala pequeña (RT60 0,3 s, DRR +6 dB): 30/30; sala media (RT60 0,6 s, DRR +3 dB): 30/30; tiempo mediana 38.7 s, máximo 40.9 s
+- [i] difusión en aula grande (RT60 1,0 s, DRR 0 dB; no cuenta para el peldaño): 0/12 en ≤60 s. El perfil «archivo» (OFDM) sufre con tanta reverberación: en un aula grande hay que acercar los móviles o mandar texto con el perfil robusto.
+- [x] modo discreto (perfil 3, MFSK 17,6-19,3 kHz, chirps 17,4-19,5 kHz): 140 bytes en 8.19 s (137 bit/s útiles); energía por debajo de 16 kHz -90.6 dB respecto al total (umbral −40 dB)
+- [x] modo discreto en su modelo de canal (altavoz que cae desde 18,5 kHz con valle en 19,5 kHz, micrófono hasta 20 kHz, cola de reverberación sin absorción del aire, que es lo pesimista): rejilla de 60 condiciones (3 salas × SNR 5-25 dB en la banda 16,5-20,5 kHz × ±200 ppm × saturación) × 5: 300/300 (100.0 %), peor condición 100 %; por SNR: 5 dB 60/60, 10 dB 60/60, 15 dB 60/60, 20 dB 60/60, 25 dB 60/60
+- [x] modo discreto sin falsos positivos: 10 min de ambiente con agudos (llaves, roces, sibilantes, balizas de 16,5-20 kHz, silbidos y saltos de tono dentro de la banda): 0 tramas falsas (96 candidatos del detector, todos descartados por la cabecera); control positivo (una trama discreta a 0 dB del ambiente en su banda) decodificado en 9/10 minutos
+- [i] aviso honesto: con un micrófono que corta antes (sala media, 15 dB): corte en 19 kHz 10/10, corte en 17 kHz 10/10, corte en 18 kHz 10/10. Ojo con leer esto como una garantía: en el simulador el filtro del micrófono atenúa por igual la señal y el ruido de la sala, y no hay ruido propio del micrófono ni del conversor detrás, así que un corte suave casi no hace daño. En un móvil real que corta en 16-18 kHz, o cuyo altavoz apenas emite ahí, la señal puede quedar por debajo de ese ruido propio y no llegar: por eso la app lo avisa junto al interruptor, y la prueba real es la de PRUEBA-CON-MOVILES.md.
+- [x] Chromium: aviso honesto del modo discreto en pantalla: «Aviso: muchos móviles baratos no emiten o no captan bien por encima de 17 kHz, así que puede no llegar; si falla, quítalo. Los niños, algunos jóvenes y los animales pueden oírlo.»
+- [x] Chromium: axe-core pantalla Enviar con modo discreto: infracciones serious/critical: 0; todas: ninguna
+- [x] Chromium: modo discreto: lo que suena es casi inaudible: 8.6 s; energía por debajo de 16 kHz -89.2 dB y de 12 kHz -95.2 dB respecto al total; estado «Sonando el mensaje en modo discreto (casi inaudible)…»
+- [x] Chromium: emisor de la foto (carrusel para difusión): 36.2 s por vuelta
+- [x] Chromium: modo discreto: texto recibido íntegro en Chromium: idéntico (SHA-256 d7e2a70beab4), a los 21.6 s; canal casi ultrasónico, sala media, 15 dB, 194 ppm; audio 48000 Hz, decodificación 352 ms
+- [x] Chromium: difusión: 3 receptores a la vez reciben la foto íntegra: sala media, un solo emisor en bucle; receptor 1 (21 dB, -186 ppm, se une a los 7 s): foto idéntica a los 43 s; receptor 2 (20 dB, -47 ppm, se une a los 9.1 s): foto idéntica a los 77 s; receptor 3 (20 dB, 109 ppm, se une a los 25.4 s): foto idéntica a los 39 s
+R5: CUMPLE (difusión ≥95 % de receptores; discreto: fuga audible ≤−40 dB, rejilla ≥95 % y peor condición ≥80 %, 0 tramas falsas con control ≥90 %; prueba en Chromium)
+
+## R6: presentación
+- [x] DEMO.md: guion de 60 segundos: 5 tramos (0-8, 8-18, 18-45, 45-55, 55-60 s), con plan B si algo falla: true
+- [x] PRUEBA-CON-MOVILES.md: cómo probarlo con dos móviles y qué medir: secciones que faltan: ninguna; 6 pruebas en la tabla; explica que el micrófono pide HTTPS: true
+- [x] tabla de resultados honesta (simulación frente a real): 10 filas, 2 marcadas «sin medir»; 7 cifras n/m, todas en SCORE.txt: sí; cada fila dice dónde se midió
+- [x] página de inicio para no técnicos, en español con resumen en inglés: enlace desde la app: true; /acerca.html, lang es, 6 secciones, resumen en inglés de 154 palabras, sin scroll horizontal a 390 px: true, enlace de vuelta a la app: true
+- [x] axe-core en la página de inicio: infracciones serious/critical: 0; todas: ninguna
+- [x] la página de inicio también funciona sin conexión: servida por el service worker sin red
+R6: CUMPLE (todas las comprobaciones de scoring/r6.ts)
+
+## R7: un capítulo del libro de Python por sonido
+- [x] capítulo 9 «Listas» (4167 palabras, 28187 bytes; comprimido con deflate a 7828 bytes, 7 tramas OFDM, 29.0 s por vuelta del carrusel): sala media (RT60 0,6 s, DRR +3 dB), SNR 15 dB, deriva aleatoria ±200 ppm, el receptor se enciende en un momento al azar de la primera vuelta; íntegro por SHA-256 tras descomprimir en ≤60 s: 20/20 (100.0 %); tiempo mediana 31.5 s, máximo 34.0 s; tasa útil equivalente 7157 bit/s de texto
+- [x] Chromium: emisor: el capítulo suena comprimido, en carrusel: 28187 bytes de texto, 29.1 s por vuelta; estado «Sonando 6 trozos en bucle. Pulsa Parar cuando el otro móvil lo tenga.»
+- [x] Chromium: receptor: capítulo del libro recibido íntegro, con vista previa y para guardar: idéntico por SHA-256 (28187 bytes), a los 32 s de pulsar Recibir; «capitulo-09-listas.md: 4167 palabras»; vista previa «# Capítulo 9: Listas
+
+<!-- modulo: m0006…»; sala media, 15 dB, 137 ppm
+R7: CUMPLE (≥95 % de 20 en ≤60 s en el simulador y prueba en Chromium)
+
+
+Peldaño confirmado: R7 (1443 s)

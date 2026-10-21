@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b5f59">
+  <meta name="description" content="Qué es Silbo: mensajes, fotos y archivos de un móvil a otro solo con sonido, sin internet.">
+  <title>Qué es Silbo · mensajes por sonido</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body class="about">
+  <header>
+    <h1><img src="icon.svg" alt="" width="36" height="36"> Silbo</h1>
+    <p class="tagline">Un móvil canta, el otro escucha. Mensajes, fotos y archivos solo con sonido.</p>
+  </header>
+
+  <main>
+    <p><a class="cta" href="./">Abrir Silbo</a></p>
+
+    <section aria-labelledby="que">
+      <h2 id="que">¿Qué es?</h2>
+      <p>Silbo pasa un mensaje, una foto o un archivo pequeño de un móvil a otro <strong>usando solo el altavoz y el micrófono</strong>. No hace falta internet, ni Bluetooth, ni crear una cuenta, ni emparejar nada. Se abre la página, uno pulsa <em>Enviar</em>, el otro <em>Recibir</em>, y listo.</p>
+      <p>El nombre viene del <strong>silbo gomero</strong>, el lenguaje silbado con el que en La Gomera se mandaban mensajes de un valle a otro sin cables.</p>
+    </section>
+
+    <section aria-labelledby="para">
+      <h2 id="para">¿Para qué sirve?</h2>
+      <ul>
+        <li>Donde los datos móviles son caros o la conexión va y viene: compartir no debería necesitar red.</li>
+        <li><strong>A muchos a la vez:</strong> el que envía repite la foto en bucle y todos los móviles que escuchan la reciben, aunque lleguen tarde. Toda una sala con un solo móvil sonando (en aulas grandes con mucho eco, por ahora, las fotos solo de cerca).</li>
+        <li><strong>Modo discreto:</strong> textos cortos casi en ultrasonido, que la mayoría de la gente no oye.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="como">
+      <h2 id="como">¿Cómo funciona, sin tecnicismos?</h2>
+      <ol>
+        <li>El mensaje se convierte en una melodía de pitidos muy rápidos, como un código Morse a muchas notas a la vez.</li>
+        <li>Antes de la melodía suena un «fiuuu» de aviso, para que el otro móvil sepa que empieza algo y a qué ritmo va.</li>
+        <li>La melodía lleva información de sobra: si el ruido o el eco borran un trozo, el receptor lo reconstruye con el resto.</li>
+        <li>Al final, el receptor comprueba con una huella digital que lo que tiene es exactamente lo enviado. Si no lo es, no lo enseña.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="medido">
+      <h2 id="medido">Qué está medido y qué no</h2>
+      <p>Somos honestos: <strong>todas las cifras son de un simulador</strong> que imita el altavoz y el micrófono de un móvil barato, salas con eco, ruido, relojes que no van exactamente igual y altavoces saturados. La prueba con móviles de verdad está por hacer.</p>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Tabla de resultados">
+        <table>
+          <thead>
+            <tr><th scope="col">Qué</th><th scope="col">Resultado</th><th scope="col">Dónde</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Texto de 140 caracteres</td><td>200/200 mensajes íntegros (sala media, ruido moderado); unos 3 s por mensaje</td><td>Simulador</td></tr>
+            <tr><td>Texto en ruido, eco, relojes desfasados y saturación</td><td>900/900 en 90 condiciones distintas (ruido fuerte a suave, 3 salas, relojes desfasados, saturación); 4,4 s por mensaje</td><td>Simulador</td></tr>
+            <tr><td>Falsas alarmas con 10 min de ruido de sala</td><td>Ninguna en 10 min; y una señal real escondida en ese ruido se detecta 10/10</td><td>Simulador</td></tr>
+            <tr><td>Foto de 10 KB</td><td>20/20 fotos completas e idénticas en menos de 60 s (unos 36 s)</td><td>Simulador</td></tr>
+            <tr><td>La app de punta a punta (texto y foto)</td><td>Pasa: texto y foto idénticos, funciona sin conexión y sin barreras de accesibilidad graves</td><td>Chromium real, micrófono simulado</td></tr>
+            <tr><td>Foto a varios móviles a la vez</td><td>60/60 receptores con la foto completa en menos de 60 s (6 a la vez, sala pequeña o media); en Chromium, los 3 a la vez</td><td>Simulador y 3 Chromium a la vez</td></tr>
+            <tr><td>Modo discreto (17-20 kHz)</td><td>300/300 mensajes (3 salas, ruido fuerte a suave); 0 falsas alarmas en 10 min; casi nada de energía audible</td><td>Simulador con su propio modelo</td></tr>
+            <tr><td>Un capítulo entero de un libro (4167 palabras)</td><td>20/20 completos e idénticos en menos de 60 s (mediana 31,5 s), comprimido y en carrusel</td><td>Simulador y Chromium</td></tr>
+            <tr><td>Aula grande con mucho eco, foto</td><td><strong>0/12: no funciona todavía</strong>; ahí hay que acercar los móviles o mandar texto, que sí aguanta</td><td>Simulador</td></tr>
+            <tr><td>Móviles de verdad</td><td><strong>Sin medir todavía</strong></td><td>Pendiente</td></tr>
+            <tr><td>Móviles que se mueven mientras suena</td><td><strong>Sin medir</strong>: el simulador no lo modela; mejor dejarlos quietos</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="hint">Aviso del modo discreto: muchos móviles baratos no emiten o no captan bien por encima de 17 kHz; si no llega, se quita y en paz. Los niños, algunos jóvenes y los animales pueden oírlo.</p>
+    </section>
+
+    <section aria-labelledby="privacidad">
+      <h2 id="privacidad">Privacidad</h2>
+      <p>Nada sale del móvil: no hay servidor ni cuentas. Ojo, eso sí: el sonido lo puede captar cualquier móvil cercano que esté escuchando con Silbo, igual que una conversación en voz alta.</p>
+    </section>
+
+    <section lang="en" aria-labelledby="en">
+      <h2 id="en">In English</h2>
+      <p><strong>Silbo</strong> sends a text, a photo or a small file from one phone to another <strong>using only sound</strong>: no internet, no Bluetooth, no accounts. It is an offline web app with its own acoustic modem written from scratch in TypeScript: frequency-hopping MFSK for text, OFDM with differential QPSK for files, Reed-Solomon with erasures and a convolutional code with soft Viterbi decoding, chirps for synchronisation and clock-drift estimation.</p>
+      <p>Files are sent as a carousel, so any number of phones can listen at once (broadcast). A discreet mode sends short texts at 17-20 kHz, which most adults cannot hear (many phones cannot play or record it well either; the app says so).</p>
+      <p>All figures come from an acoustic channel simulator (phone speaker and microphone response, synthetic rooms, noise, ±200 ppm clock drift, clipping, automatic gain control) and an end-to-end test in real Chromium with a simulated microphone. Real-phone tests are still to be done.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p class="hint"><a href="./">Volver a Silbo</a></p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "Silbo: mensajes por sonido",
+  "short_name": "Silbo",
+  "description": "Pasa mensajes, fotos y archivos de un móvil a otro solo con sonido, sin internet.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f5f1",
+  "theme_color": "#0b5f59",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
