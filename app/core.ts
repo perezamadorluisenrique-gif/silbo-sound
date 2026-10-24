@@ -147,6 +147,9 @@ export class Receiver {
   }
 }
 
+/** Zeros put in front of each window, one preamble long (85 ms). */
+const LEAD_PAD = 4096;
+
 /**
  * Decode one receive window (48 kHz). skip: samples at the start of the window already covered
  * by frames decoded in earlier windows. Returns the payloads and the sample where the last one
@@ -156,6 +159,10 @@ export function decodeWindow(win: Float32Array, skip = -1): { payloads: Uint8Arr
   // don't filter and correlate again what was already decoded: keep 0.5 s before the skip point
   // (filter warm-up, early arrivals), which roughly halves the work on a carousel
   const cut = skip > FS ? skip - FS / 2 : 0;
-  const got = mf.decodeAny(cut ? win.subarray(cut) : win, skip - cut); // phone band and discreet band
-  return { payloads: got.map((d) => d.data), lastEnd: got.reduce((m, d) => Math.max(m, d.stats.end + cut), -1) };
+  // silence in front: the preamble correlator can't look before sample 0, so a frame whose
+  // preamble began a few ms before listening started was lost (bench: late start)
+  const x = new Float32Array(LEAD_PAD + win.length - cut);
+  x.set(cut ? win.subarray(cut) : win, LEAD_PAD);
+  const got = mf.decodeAny(x, skip < 0 ? -1 : skip - cut + LEAD_PAD); // phone band and discreet band
+  return { payloads: got.map((d) => d.data), lastEnd: got.reduce((m, d) => Math.max(m, d.stats.end + cut - LEAD_PAD), -1) };
 }
