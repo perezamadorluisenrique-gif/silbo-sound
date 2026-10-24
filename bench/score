@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Bench ladder (R0-R6). Usage: bench/score [--only R2] [--skip-slow]
+exec node "$(dirname "$0")/score.ts" "$@"
