@@ -3,69 +3,106 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b5f59">
+  <meta name="theme-color" content="#F5F4F0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#111214" media="(prefers-color-scheme: dark)">
   <meta name="description" content="Silbo: pasa mensajes, fotos y archivos de un móvil a otro solo con sonido, sin internet.">
   <title>Silbo · mensajes por sonido</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
   <header>
-    <h1><img src="icon.svg" alt="" width="36" height="36"> Silbo</h1>
-    <p class="tagline">Pasa mensajes y fotos de un móvil a otro solo con sonido. Sin internet, sin Bluetooth, sin cuentas. <a class="about-link" href="acerca.html">¿Qué es esto?</a></p>
+    <h1><img src="icon.svg" alt="" width="32" height="32"> Silbo</h1>
+    <span id="net-state" class="net">Sin red · sin cuentas</span>
   </header>
 
   <main>
-    <nav class="modes" aria-label="Modo">
-      <button id="mode-send" class="big" type="button" aria-pressed="false">
-        <span aria-hidden="true">🔊</span> Enviar
+    <div class="modes" role="group" aria-label="Modo">
+      <button id="mode-send" class="seg" type="button" aria-pressed="false">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 9a4 4 0 0 1 0 6"/></svg>Enviar
       </button>
-      <button id="mode-recv" class="big" type="button" aria-pressed="false">
-        <span aria-hidden="true">👂</span> Recibir
+      <button id="mode-recv" class="seg" type="button" aria-pressed="false">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/></svg>Recibir
       </button>
-    </nav>
+    </div>
 
     <section id="send-panel" class="panel" hidden aria-labelledby="send-title">
-      <h2 id="send-title">Enviar</h2>
-      <label for="text">Mensaje</label>
-      <textarea id="text" rows="3" maxlength="5000" placeholder="Escribe aquí lo que quieres mandar"></textarea>
-      <p class="or">o</p>
-      <label for="file">Foto o archivo (hasta 64 KB; las fotos grandes se reducen solas)</label>
-      <input id="file" type="file">
-      <div class="check">
-        <input id="discreto" type="checkbox" aria-describedby="discreto-aviso">
-        <label for="discreto">Modo discreto: casi ultrasonido (17-20 kHz), solo texto corto</label>
+      <h2 id="send-title" class="sr-only">Enviar</h2>
+      <div class="field">
+        <div class="field-head"><label for="text">01 — Mensaje</label><span id="count">0/5000</span></div>
+        <textarea id="text" rows="4" maxlength="5000" placeholder="Escribe aquí lo que quieres mandar"></textarea>
       </div>
-      <p id="discreto-aviso" class="hint">Aviso: muchos móviles baratos no emiten o no captan bien por encima de 17 kHz, así que puede no llegar; si falla, quítalo. Los niños, algunos jóvenes y los animales pueden oírlo.</p>
-      <p id="estimate" class="hint"></p>
-      <div class="row">
-        <button id="play" class="action" type="button">Sonar</button>
-        <button id="stop-send" class="secondary" type="button" disabled>Parar</button>
+      <div class="field">
+        <div class="field-head"><span class="lbl">02 — Opciones</span></div>
+        <div class="opts">
+          <label class="opt opt-file" for="file">
+            <input id="file" type="file" class="file-input">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5l-8.6 8.6a5 5 0 0 1-7-7l9-9a3.3 3.3 0 0 1 4.7 4.7l-9 9a1.7 1.7 0 0 1-2.4-2.4l8.2-8.2"/></svg>
+            <span class="opt-main">Adjuntar foto o archivo</span>
+            <span id="file-name" class="meta">≤ 64 KB</span>
+          </label>
+          <div class="opt">
+            <div class="opt-main">
+              <label id="discreto-label" for="discreto" class="opt-title">Modo discreto</label>
+              <div class="meta">17–20 kHz · texto corto</div>
+            </div>
+            <span class="switch">
+              <input id="discreto" type="checkbox" role="switch" aria-describedby="discreto-aviso">
+              <span class="track" aria-hidden="true"><span class="thumb"></span></span>
+            </span>
+          </div>
+        </div>
+        <p id="discreto-aviso" class="hint">Aviso: muchos móviles baratos no emiten o no captan bien por encima de 17 kHz, así que puede no llegar; si falla, quítalo. Los niños, algunos jóvenes y los animales pueden oírlo.</p>
+        <p id="estimate" class="meta est"></p>
       </div>
-      <p class="hint">Sube el volumen y deja los dos móviles quietos, cerca y sobre la mesa. Las fotos y archivos se repiten en bucle: así cualquiera que escuche tarde los recibe completos.</p>
     </section>
 
     <section id="recv-panel" class="panel" hidden aria-labelledby="recv-title">
-      <h2 id="recv-title">Recibir</h2>
-      <div class="row">
-        <button id="stop-recv" class="secondary" type="button" disabled>Dejar de escuchar</button>
+      <div class="recv-head">
+        <div>
+          <div class="lbl-muted">Recibiendo</div>
+          <h2 id="recv-title">Escuchando</h2>
+        </div>
+        <span class="pct" aria-hidden="true"><span id="pct-n">0</span><span class="u">%</span></span>
       </div>
-      <ul id="inbox" aria-label="Recibido"></ul>
+      <div class="field">
+        <div class="field-head"><span class="lbl">Recibido</span><span id="inbox-count">00</span></div>
+        <ul id="inbox" aria-label="Recibido"></ul>
+      </div>
     </section>
 
     <section class="viz" aria-label="Sonido">
-      <canvas id="spectro" width="640" height="160" role="img" aria-label="Espectrograma: el tiempo avanza hacia la izquierda, los tonos agudos arriba"></canvas>
-      <div class="bar">
-        <label id="progress-label" for="progress">Progreso</label>
-        <progress id="progress" max="1" value="0"></progress>
+      <div class="field-head"><span class="lbl">03 — Sonido</span><span>0–20 kHz</span></div>
+      <div class="scope">
+        <canvas id="spectro" width="640" height="160" role="img" aria-label="Espectrograma: el tiempo avanza hacia la izquierda, los tonos agudos arriba"></canvas>
+      </div>
+      <div class="prog">
+        <label id="progress-label" for="progress" class="meta">Progreso</label>
+        <progress id="progress" max="1" value="0" class="sr-only"></progress>
+        <div id="cells" class="cells" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </div>
       <p id="status" role="status" aria-live="polite">Elige Enviar o Recibir.</p>
     </section>
+
+    <div class="actions send-only">
+      <div class="row">
+        <button id="play" class="action" type="button">Sonar<span id="play-dur" class="meta-btn"></span></button>
+        <button id="stop-send" class="secondary" type="button" disabled>Parar</button>
+      </div>
+      <p class="hint">Sube el volumen y deja los dos móviles quietos, cerca y sobre la mesa. Las fotos y archivos se repiten en bucle: así cualquiera que escuche tarde los recibe completos.</p>
+    </div>
+
+    <div class="actions recv-only">
+      <button id="stop-recv" class="stop" type="button" disabled>Dejar de escuchar<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button>
+    </div>
   </main>
 
   <footer>
-    <p>Funciona sin conexión una vez cargada. El módem (modulación, sincronía y corrección de errores) está hecho a mano para este proyecto.</p>
+    <p>Funciona sin conexión una vez cargada. El módem (modulación, sincronía y corrección de errores) está hecho a mano para este proyecto. <a class="about-link" href="acerca.html">¿Qué es esto?</a></p>
   </footer>
   <script type="module" src="app.js"></script>
 </body>

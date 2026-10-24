@@ -152,7 +152,7 @@ async function main() {
       return { w: Math.round(r.width), h: Math.round(r.height) };
     }));
     const noHScroll = await sp.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
-    check('viewport de móvil (390×844)', btns.every((b) => b.h >= 64 && b.w >= 150) && noHScroll, `botones Enviar ${btns[0]!.w}×${btns[0]!.h} y Recibir ${btns[1]!.w}×${btns[1]!.h} px; sin scroll horizontal: ${noHScroll}`);
+    check('viewport de móvil (390×844)', btns.every((b) => b.h >= 44 && b.w >= 150) && noHScroll, `botones Enviar ${btns[0]!.w}×${btns[0]!.h} y Recibir ${btns[1]!.w}×${btns[1]!.h} px; sin scroll horizontal: ${noHScroll}`);
     const man = await sp.evaluate(async () => {
       const href = document.querySelector('link[rel=manifest]')?.getAttribute('href');
       const m = href ? await fetch(href).then((r) => r.json()) : null;
@@ -211,8 +211,11 @@ async function main() {
       const lit = await page.evaluate(() => {
         const c = document.querySelector('#spectro') as HTMLCanvasElement;
         const d = c.getContext('2d')!.getImageData(0, 0, c.width, c.height).data;
+        // «lit» = pixels that differ from the empty colour (--grid-empty) of the Tinta ramp
+        const e = getComputedStyle(document.documentElement).getPropertyValue('--grid-empty').trim().replace('#', '');
+        const [er, eg, eb] = [0, 2, 4].map((k) => parseInt(e.slice(k, k + 2), 16));
         let n = 0;
-        for (let i = 0; i < d.length; i += 4) if (d[i + 1]! > 120) n++;
+        for (let i = 0; i < d.length; i += 4) if (Math.abs(d[i]! - er!) + Math.abs(d[i + 1]! - eg!) + Math.abs(d[i + 2]! - eb!) > 40) n++;
         return n / (d.length / 4);
       });
       check('espectrograma dibuja el sonido recibido', lit > 0.01, `${(lit * 100).toFixed(1)} % de píxeles encendidos`);
