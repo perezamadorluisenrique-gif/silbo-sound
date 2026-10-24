@@ -147,6 +147,7 @@ function markdown(md: string): string {
   for (const raw of md.split('\n')) {
     const l = raw.trimEnd();
     let m: RegExpMatchArray | null;
+    if (!l.startsWith('|') && out[out.length - 1]?.startsWith('<tr')) out.push('</table></div>');
     if ((m = l.match(/^(#{2,3}) (.*)$/))) {
       flush();
       close();
@@ -161,6 +162,19 @@ function markdown(md: string): string {
         list = kind;
       }
       out.push(`<li>${inline(m[2]!)}</li>`);
+    } else if ((m = l.match(/^\s+[-*] (.*)$/)) && list) {
+      // nested bullet: a sub-list inside the previous item
+      const last = out[out.length - 1]!;
+      const li = `<li>${inline(m[1]!)}</li>`;
+      out[out.length - 1] = last.endsWith('</ul></li>') ? last.replace(/<\/ul><\/li>$/, `${li}</ul></li>`) : last.replace(/<\/li>$/, `<ul>${li}</ul></li>`);
+    } else if (l.startsWith('|')) {
+      flush();
+      close();
+      const cells = l.replace(/^\||\|$/g, '').split('|').map((c) => c.trim());
+      if (cells.every((c) => /^:?-+:?$/.test(c))) continue;
+      const tag = out[out.length - 1]?.startsWith('<tr') ? 'td' : 'th';
+      if (tag === 'th') out.push('<div class="tablewrap"><table class="md">');
+      out.push(`<tr>${cells.map((c) => `<${tag}>${inline(c)}</${tag}>`).join('')}</tr>`);
     } else if (/^\s+\S/.test(l) && list) {
       out[out.length - 1] = out[out.length - 1]!.replace(/<\/li>$/, ' ' + inline(l.trim()) + '</li>');
     } else if (!l.trim()) {
@@ -173,6 +187,7 @@ function markdown(md: string): string {
   }
   flush();
   close();
+  if (out[out.length - 1]?.startsWith('<tr')) out.push('</table></div>');
   return out.join('\n');
 }
 
@@ -180,6 +195,7 @@ function markdown(md: string): string {
 function build(): string {
   const { cur, prev } = pick(loadAll(), history());
   if (!cur) throw new Error('no results in bench/results/: run node bench/run.ts --quick first');
+  const improve = existsSync(join(BENCH, 'IMPROVE.md')) ? readFileSync(join(BENCH, 'IMPROVE.md'), 'utf8') : '';
   const writeup = existsSync(join(BENCH, 'WRITEUP.md')) ? readFileSync(join(BENCH, 'WRITEUP.md'), 'utf8') : '## Method\n\nSee bench/DECISIONS.md.\n\n## Findings\n\n(not written yet)\n\n## Limitations\n\n(not written yet)\n';
   const pSweep = (id: string) => prev?.sweeps.find((s) => s.id === id);
   const worst = cur.scenarios.find((s) => s.id === 'worst');
@@ -307,6 +323,8 @@ p, li { max-width: 72ch; }
 .tip strong { font-size: 14px; }
 .tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--divider); border-radius: 10px; background: var(--sheet); }
 table { border-collapse: collapse; width: 100%; font-size: 14px; line-height: 20px; }
+table.md td, table.md th { white-space: normal; }
+table.md td:first-child { min-width: 9em; }
 th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--divider); vertical-align: top; white-space: nowrap; }
 td.wrap { white-space: normal; min-width: 220px; }
 tr:last-child th, tr:last-child td { border-bottom: 0; }
@@ -369,6 +387,7 @@ ${prev && (prev.mode !== 'full' || cur.mode !== 'full') ? '<p class="meta">Quick
 
 <div class="writeup">
 ${markdown(writeup)}
+${improve ? markdown('## Improvement tried\n\n' + improve) : ''}
 </div>
 
 <h2 id="reproduce">Reproduce</h2>

@@ -1,6 +1,6 @@
 # Next steps
 
-1. Wait for the full run of `bench/improve-late-start` (worktree `/home/user/improve`), then write `bench/IMPROVE.md` (R6).
+1. ~~R6 after-run~~ done: `bench/IMPROVE.md`.
 2. Full run of main's tip (90460ec, pre-bench codec) as the "previous commit" for the page comparison (R3).
 3. Run `./bench/score`, write `bench/RESULTS.md`, and update the PR.
 

@@ -1,4 +1,4 @@
 status: running
-updated: 2026-10-24T13:59:58Z
-rung: R0 R1 R2 R5 pass; R3 waits on previous-commit results, R4 on its timed check
-note: R6 after-run in progress on bench/improve-late-start
+updated: 2026-10-24T14:41:35Z
+rung: R0 R1 R2 R5 R6 pass; R3 waits on previous-commit run, R4 not yet timed
+note: previous-commit (90460ec) full run in progress; then full score + RESULTS.md
