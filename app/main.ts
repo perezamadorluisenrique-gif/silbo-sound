@@ -22,6 +22,14 @@ const canvas = $<HTMLCanvasElement>('spectro');
 const progress = $<HTMLProgressElement>('progress');
 const progressLabel = $<HTMLLabelElement>('progress-label');
 const statusEl = $<HTMLParagraphElement>('status');
+const netState = $<HTMLElement>('net-state');
+const countEl = $<HTMLElement>('count');
+const fileNameEl = $<HTMLElement>('file-name');
+const playDur = $<HTMLElement>('play-dur');
+const pctEl = $<HTMLElement>('pct-n');
+const recvTitle = $<HTMLElement>('recv-title');
+const inboxCount = $<HTMLElement>('inbox-count');
+const cells = Array.from(document.querySelectorAll<HTMLElement>('#cells i'));
 
 // Test and debugging hook (read by the Playwright end-to-end test).
 const hook = {
@@ -54,7 +62,20 @@ function setStatus(s: string) {
 function setProgress(v: number, label: string) {
   progress.value = Math.max(0, Math.min(1, v));
   progressLabel.textContent = label;
+  const on = Math.round(progress.value * cells.length);
+  cells.forEach((c, i) => c.classList.toggle('on', i < on));
+  pctEl.textContent = String(Math.round(progress.value * 100));
 }
+/** Header state: «SIN RED · SIN CUENTAS» normally, «MIC ABIERTO» while listening. */
+function setMic(open: boolean) {
+  netState.textContent = open ? 'Mic abierto' : 'Sin red · sin cuentas';
+  netState.classList.toggle('is-mic', open);
+  recvTitle.textContent = open ? 'Escuchando' : 'En pausa';
+}
+const clock = () => new Date().toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit', hour12: false });
+new MutationObserver(() => {
+  inboxCount.textContent = String(inbox.children.length).padStart(2, '0');
+}).observe(inbox, { childList: true });
 
 // ---------- audio context and spectrogram ----------
 let ctx: AudioContext | null = null;
@@ -77,6 +98,27 @@ function audio(): AudioContext {
   return ctx;
 }
 
+/** 256-step colour ramp grid-empty → ochre-soft → ochre → ochre-deep → ink, read from the CSS variables (follows the light/dark theme). */
+let ramp: string[] = [];
+function buildRamp() {
+  const css = getComputedStyle(document.documentElement);
+  const rgb = (name: string, fallback: string): [number, number, number] => {
+    const hex = (css.getPropertyValue(name).trim() || fallback).replace('#', '');
+    const n = parseInt(hex.length === 3 ? hex.replace(/./g, '$&$&') : hex, 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  };
+  const stops = [rgb('--grid-empty', '#EEECE6'), rgb('--ochre-soft', '#F7E2AE'), rgb('--ochre', '#F2C14E'), rgb('--ochre-deep', '#C98F12'), rgb('--ink', '#121417')];
+  ramp = Array.from({ length: 256 }, (_, i) => {
+    const t = (i / 255) * (stops.length - 1);
+    const k = Math.min(stops.length - 2, Math.floor(t));
+    const f = t - k;
+    const [a, b] = [stops[k]!, stops[k + 1]!];
+    return `rgb(${Math.round(a[0] + (b[0] - a[0]) * f)},${Math.round(a[1] + (b[1] - a[1]) * f)},${Math.round(a[2] + (b[2] - a[2]) * f)})`;
+  });
+}
+buildRamp();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', buildRamp);
+
 function drawLoop() {
   const g = canvas.getContext('2d')!;
   const bins = new Uint8Array(analyser!.frequencyBinCount);
@@ -89,12 +131,7 @@ function drawLoop() {
       g.drawImage(canvas, -2, 0);
       const top = Math.min(bins.length, Math.floor((fMax / (ctx.sampleRate / 2)) * bins.length));
       for (let y = 0; y < H; y++) {
-        const v = bins[Math.floor(((H - 1 - y) / H) * top)]! / 255;
-        // dark teal -> teal -> pale yellow
-        const r = Math.round(255 * Math.max(0, v * 1.6 - 0.6));
-        const gr = Math.round(40 + 200 * v);
-        const b = Math.round(40 + 120 * Math.min(1, v * 1.3) - 60 * Math.max(0, v - 0.7));
-        g.fillStyle = `rgb(${r},${gr},${b})`;
+        g.fillStyle = ramp[bins[Math.floor(((H - 1 - y) / H) * top)]!]!;
         g.fillRect(W - 2, y, 2, 1);
       }
     }
@@ -109,6 +146,7 @@ function showMode(m: 'send' | 'recv') {
   modeRecv.setAttribute('aria-pressed', String(m === 'recv'));
   sendPanel.hidden = m !== 'send';
   recvPanel.hidden = m !== 'recv';
+  document.body.dataset.mode = m;
 }
 modeSend.addEventListener('click', () => {
   stopListening();
@@ -155,6 +193,14 @@ async function shrinkPhoto(f: File): Promise<{ data: Uint8Array; name: string; t
 }
 
 function updateEstimate() {
+  playDur.textContent = '';
+  countEl.textContent = `${textEl.value.length}/${textEl.maxLength}`;
+  fileNameEl.textContent = fileEl.files?.[0]?.name ?? '≤ 64 KB';
+  updateEstimateText();
+  const m = /(\d+) s/.exec(estimateEl.textContent ?? '');
+  if (m && !estimateEl.textContent!.startsWith('Demasiado')) playDur.textContent = `${m[1]} s`;
+}
+function updateEstimateText() {
   const f = fileEl.files?.[0];
   if (f) {
     const n = f.type.startsWith('image/') ? Math.min(f.size, PHOTO_TARGET) : f.size;
@@ -331,6 +377,7 @@ async function startListening() {
   };
   decodeTimer = window.setInterval(decodeTick, DECODE_EVERY_S * 1000);
   stopRecvBtn.disabled = false;
+  setMic(true);
   setProgress(0, 'Esperando un archivo');
   setStatus('Escuchando… acerca el otro móvil.');
 }
@@ -357,6 +404,7 @@ function stopListening() {
   if (stream) setStatus('Ya no escucho.');
   stream = null;
   stopRecvBtn.disabled = true;
+  setMic(false);
 }
 stopRecvBtn.addEventListener('click', stopListening);
 
@@ -372,6 +420,7 @@ function show(ev: RxEvent) {
   hook.events.push(ev.type === 'file' ? { type: 'file', name: ev.name, mime: ev.mime, size: ev.data.length, at } : { ...ev, at });
   if (ev.type === 'text') {
     const li = document.createElement('li');
+    li.dataset.t = clock();
     const p = document.createElement('p');
     p.className = 'received-text';
     p.textContent = ev.text;
@@ -384,6 +433,7 @@ function show(ev: RxEvent) {
     let li = progressItems.get(ev.fileId);
     if (!li) {
       li = document.createElement('li');
+      li.dataset.t = clock();
       progressItems.set(ev.fileId, li);
       inbox.prepend(li);
     }
@@ -393,6 +443,7 @@ function show(ev: RxEvent) {
     return;
   }
   const li = progressItems.get(ev.fileId) ?? document.createElement('li');
+  li.dataset.t ||= clock();
   if (!li.isConnected) inbox.prepend(li);
   li.dataset.done = '1';
   li.textContent = '';
