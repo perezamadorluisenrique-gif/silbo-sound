@@ -205,6 +205,13 @@ export function resolveEvidence(key: string, full: Results, ablations: Record<st
     const st = full.sweeps.find((s) => s.id === m![1])?.steps.find((x) => x.value === Number(m![2])) as Record<string, number> | undefined;
     return st ? st[m[3]!]! : null;
   }
+  // success rate for one message length: `awgn[-7].len140 = 0`, `scenario.cafe.len16 = 0.597`
+  m = key.match(/^([a-z]+)\[(-?[\d.]+)\]\.len(\d+)$/) ?? key.match(/^scenario\.([a-z]+)()\.len(\d+)$/);
+  if (m) {
+    const row = (key.startsWith('scenario.') ? full.scenarios.find((s) => s.id === m![1]) : full.sweeps.find((s) => s.id === m![1])?.steps.find((x) => x.value === Number(m![2]))) as { byLength?: Record<string, { n: number; ok: number }> } | undefined;
+    const b = row?.byLength?.[m[3]!];
+    return b ? b.ok / b.n : null;
+  }
   m = key.match(/^scenario\.([a-z]+)\.(rate|rawBer|syncRate|cer)$/);
   if (m) return ((full.scenarios.find((s) => s.id === m![1]) as Record<string, unknown> | undefined)?.[m[2]!] as number) ?? null;
   m = key.match(/^false\.([a-z]+)\.(frames|alarms|alarmsPerMin)$/);
