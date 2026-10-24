@@ -4,7 +4,17 @@ A summary of the reliability bench for Silbo's text messages. The full story wit
 
 ## What `./bench/score` confirms
 
-SCORE_PLACEHOLDER
+Every rung passes: **R6, with R0–R5 all green** (full output in `bench/SCORE.txt`).
+
+| Rung | What it checks | Result |
+|---|---|---|
+| R0 | `score` runs; `CODEC.md` covers the codec; clean round trip through the app path | 100/100 |
+| R1 | ≥ 6 impairments, each with a passing unit test | 10 impairments, 13 tests pass |
+| R2 | full N=200 sweep JSON valid for the current code; same seed → same results, different seed → different | `results/06ca291.json`, reproducible |
+| R3 | page builds: 10 charts, previous-commit comparison (90460ec), summary, write-up; 360 px light/dark without horizontal scroll | pass |
+| R4 | `bench.yml` triggers, artifact on PRs, results commit + Pages on main, nothing posted on PRs; `--quick` < 5 min | 147 s locally; ~3 min on GitHub (6 green runs) |
+| R5 | write-up with 7 findings ranked by impact and 3 suggestions | 51 `key = value` evidence references, all matching the results |
+| R6 | best suggestion implemented on `bench/improve-late-start`, full before/after | late start 0/200 → 200/200, all else identical |
 
 ## Reproduce
 

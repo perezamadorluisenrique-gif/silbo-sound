@@ -1,0 +1,78 @@
+# bench/score — 2026-10-24T14:48:49.878Z
+codec 4abd51acfa93ab6d · bench e096cc1b00180b3e · git bb7bf3f
+
+## R0: score runs; CODEC.md; clean round trip 100/100
+- [x] bench/score runs
+- [x] CODEC.md covers modulation, frequencies, symbol rate, framing, error correction, entry points, headless
+- [x] clean encode→decode round trip through the app path (planText → decodeWindow), lengths 16/64/140 chars: 100/100
+R0: PASS
+
+## R1: ≥6 impairments, each with a passing unit test
+- [x] 10 impairments swept: awgn, babble, distance, reverb, mic, speaker, clip, drift, late, dropouts
+- [x] awgn: awgn: in-band SNR of the white noise is within ±0.5 dB of the target; awgn: noise is white (flat within 1 dB between 1 and 7 kHz)
+- [x] babble: babble: in-band SNR within ±0.5 dB of the target, and it fluctuates like speech; babble: same seed, same noise; different seed, different noise
+- [x] distance: distance: 1/d level at 1 kHz (±0.5 dB) and growing high-frequency roll-off
+- [x] reverb: reverb: impulse response has the requested RT60 (±10 %) and DRR (±0.5 dB)
+- [x] mic: mic: band-pass 300 Hz to cut-off with a resonance below the cut-off
+- [x] speaker: speaker: distortion grows with drive, level is preserved
+- [x] clip: clip: peak placed at the requested level, everything above full scale clipped
+- [x] drift: drift: resampling by 1+ppm·1e-6 moves a pulse 1 s later by the right amount (±1 ppm), with fractional delay
+- [x] late: late: the receiver starts lateMs after the preamble; otherwise a random lead of 0.2-1.0 s
+- [x] dropouts: dropouts: gap rate and length match the parameters, gaps are silent
+- [x] unit tests: 13 pass, 0 fail
+R1: PASS
+
+## R2: full sweep JSON valid for the current codec; reproducible with the same seed
+- [x] full results 06ca291.json (N=200, codec 4abd51acfa93ab6d, bench e096cc1b00180b3e)
+- [x] schema and contents valid
+- [x] same seed twice (reverb, drift, dropouts sweeps + scenarios, N=6): identical results apart from timings
+- [x] a different seed gives different raw results (the seed is really used)
+R2: PASS
+
+## R3: results page builds with charts and the previous-commit comparison
+- [x] site build: ok
+- [x] 10 success-rate charts (one per impairment: 10)
+- [x] comparison with the previous commit's results (90460ec)
+- [x] summary table
+- [x] write-up sections: method, findings, limitations
+- [x] dark mode and viewport meta
+- [x] light mode at 360 px: page width 360 px (no horizontal scroll), background rgb(245, 244, 240)
+- [x] dark mode at 360 px: page width 360 px (no horizontal scroll), background rgb(17, 18, 20)
+R3: PASS
+
+## R4: CI workflow valid; --quick under 5 min
+- [x] push trigger on the codec paths (src/modem, src/fec, src/dsp, src/file, app/core.ts)
+- [x] pull_request trigger on the codec paths
+- [x] workflow_dispatch
+- [x] runs bench/run.ts --quick
+- [x] uploads the results as a workflow artifact
+- [x] commits the results JSON, but not on pull requests
+- [x] rebuilds the page and deploys it to GitHub Pages
+- [x] posts nothing externally on PRs (no comment actions, no PR/issue write permission)
+- [x] the app's Pages workflow also publishes /bench (so app deploys do not drop it)
+- [x] bench/run.ts --quick: 147 s (limit 300 s) on this machine with 4 cores
+- [x] quick results JSON is valid
+R4: PASS
+
+## R5: write-up: findings ranked by impact, 3 evidence-backed suggestions
+- [x] section «Question»
+- [x] section «Method»
+- [x] section «Findings»
+- [x] section «Suggestions»
+- [x] section «Limitations»
+- [x] 7 numbered findings (ranked by impact; need ≥ 5)
+- [x] the findings section states how they are ranked
+- [x] 3 numbered suggestions (need exactly 3)
+- [x] 51 evidence references checked against 06ca291.json
+- [x] every finding cites evidence
+- [x] every suggestion cites evidence
+- [x] the codec is untouched on this branch (suggestions not implemented here)
+R5: PASS
+
+## R6: OPTIONAL: best suggestion implemented on bench/improve-<name>, before/after reported
+- [x] names its branch: bench/improve-late-start
+- [x] branch bench/improve-late-start exists
+- [x] before (06ca291.json) and after (04b6c11.json) are full runs of different codecs with the same bench
+R6: PASS
+
+Highest rung with every lower rung passing: R6

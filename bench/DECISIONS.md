@@ -44,3 +44,12 @@ Nobody was available to answer questions, so every judgement call is written dow
 - **Deployment**: the existing Pages workflow deploys `dist/` (the app) on pushes to main, and a Pages deployment replaces the whole site. So the bench page is built into `dist/bench` by *both* workflows: `pages.yml` (app deploys keep /bench) and `bench.yml` (codec changes refresh it).
 - **CI commits results only on main.** On other branches and PRs the workflow runs and uploads the JSON as an artifact; committing from CI to a work branch would race the people pushing to it. On PRs nothing is posted (no comment step, no PR write permission).
 - `--quick` (N = 20) runs all sweeps, scenarios and a shorter false-detection test in ~2.5 min on 4 cores (GitHub's public-repo runners have 4).
+
+## Findings, suggestions and R6
+
+- **Ranking of findings** = how much of real use a problem plausibly touches × how badly it fails there. Echo comes first because it fails everyday scenarios. Late start ranks third despite being total, because it needs listening to start inside an 85 ms window.
+- **Which suggestion to implement (R6):** padding the receive window. Its ablation showed a complete fix, it costs no airtime, and it only touches the receiver, so it is backward-compatible. The hop-set and parity changes have larger reach but change the wire format and have trade-offs (the 7-hop profile's top tone moves to ~7.5 kHz), so they are a product decision, not mine.
+- **R6 pad length:** one preamble (4096 samples) rather than the ablation's 0.5 s. That is enough by construction: a preamble that started more than 85 ms before capture began is gone anyway. The full after-run confirms 200/200 up to 80 ms.
+- **R6 lives on its own branch** (`bench/improve-late-start`, created from this branch before the write-up commits) with the codec change as a single commit. The bench branch itself never touches codec files (`score` R5 checks this).
+- **Previous commit for the page** = main's tip before the bench (90460ec), measured with today's bench through `--codec`. It has the same codec files as 06ca291, so the expected and observed answer is "no change". That is still the honest comparison for this branch; the first codec change merged to main will be the first real one.
+- **Evidence keys in `score`** were extended (per-length rates) so finding 2 could cite numbers. No existing check was changed or loosened.
