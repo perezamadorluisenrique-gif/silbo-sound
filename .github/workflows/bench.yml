@@ -1,0 +1,103 @@
+name: Bench
+
+# Reliability bench (bench/): re-measures the codec over the simulated acoustic
+# channel whenever the codec or the bench's measurement code changes.
+# - pull requests: run --quick and upload the JSON as a workflow artifact; nothing is posted.
+# - pushes to main: also commit bench/results/<sha>.json and redeploy Pages (app + /bench).
+# - pushes to other branches: run and upload the artifact only (no commits on work branches).
+
+on:
+  push:
+    paths:
+      - src/modem/**
+      - src/fec/**
+      - src/dsp/**
+      - src/file/**
+      - app/core.ts
+      - bench/channel/**
+      - bench/lib/**
+      - bench/sweeps.ts
+      - bench/trial.ts
+      - bench/run.ts
+      - bench/worker.ts
+      - .github/workflows/bench.yml
+  pull_request:
+    paths:
+      - src/modem/**
+      - src/fec/**
+      - src/dsp/**
+      - src/file/**
+      - app/core.ts
+      - bench/channel/**
+      - bench/lib/**
+      - bench/sweeps.ts
+      - bench/trial.ts
+      - bench/run.ts
+      - bench/worker.ts
+      - .github/workflows/bench.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write # commit bench/results on main only (step guarded below)
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the page compares with the previous commit's results
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.18
+          cache: npm
+      - run: npm ci
+      - name: Channel unit tests
+        run: node --test bench/test/*.test.ts
+      - name: Quick sweep (N=20 per step)
+        run: node bench/run.ts --quick
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bench-results-${{ github.sha }}
+          path: bench/results/*.json
+          if-no-files-found: error
+      - name: Commit results
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add bench/results/*.json
+          if git diff --cached --quiet; then echo "no new results"; exit 0; fi
+          git commit -m "bench: results for ${GITHUB_SHA::7} (quick)"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((i * 5))
+          done
+          exit 1
+      - name: Build app and bench page
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: node tools/build-app.ts && node bench/site/build.ts --out dist/bench
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        with:
+          path: dist
+
+  deploy:
+    needs: bench
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

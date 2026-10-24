@@ -19,11 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # bench page compares with the previous commit's results
       - uses: actions/setup-node@v4
         with:
           node-version: 22.18
           cache: npm
       - run: npm ci && node tools/build-app.ts
+      # keep the reliability bench page at /bench on every app deploy
+      - run: node bench/site/build.ts --out dist/bench
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
