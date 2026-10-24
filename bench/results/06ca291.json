@@ -1,0 +1,3087 @@
+{
+ "schema": 1,
+ "sha": "06ca291",
+ "dirty": false,
+ "date": "2026-10-24T05:15:17.966Z",
+ "mode": "full",
+ "n": 200,
+ "seed": 1,
+ "lengths": [
+  16,
+  64,
+  140
+ ],
+ "codecHash": "4abd51acfa93ab6d",
+ "benchHash": "e096cc1b00180b3e",
+ "codecRoot": ".",
+ "path": "app/core.ts planText() → bench channel → decodeWindow() (profile 1 «robusto», one MFSK frame)",
+ "baseline": {
+  "awgnDb": 30,
+  "snrBandHz": [
+   500,
+   8000
+  ],
+  "leadS": [
+   0.2,
+   1
+  ],
+  "roomVolumeM3": 100,
+  "reverbDistanceM": 0.5,
+  "quantisationBits": 16
+ },
+ "env": {
+  "node": "v22.22.0",
+  "cpus": 4,
+  "platform": "linux",
+  "workers": 4
+ },
+ "durationS": 1457.3,
+ "sweeps": [
+  {
+   "id": "awgn",
+   "label": "White noise",
+   "param": "in-band SNR",
+   "unit": "dB",
+   "worse": "down",
+   "note": "Stationary white noise floor (replaces the 30 dB baseline floor).",
+   "steps": [
+    {
+     "value": 30,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 125,
+      "p95": 221
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 10,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 119,
+      "p95": 199
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 0,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 122,
+      "p95": 179
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -3,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0016,
+     "rawBerP90": 0.0036,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 116,
+      "p95": 167
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -5,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0118,
+     "rawBerP90": 0.0168,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 117,
+      "p95": 181
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -6,
+     "n": 200,
+     "ok": 196,
+     "rate": 0.98,
+     "ci95": [
+      0.9497,
+      0.9922
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 62
+      }
+     },
+     "cer": 0.02,
+     "rawBer": 0.0246,
+     "rawBerP90": 0.0318,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 117,
+      "p95": 201
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -7,
+     "n": 200,
+     "ok": 106,
+     "rate": 0.53,
+     "ci95": [
+      0.4609,
+      0.598
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 64
+      },
+      "64": {
+       "n": 67,
+       "ok": 42
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.47,
+     "rawBer": 0.0459,
+     "rawBerP90": 0.0564,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 113,
+      "p95": 186
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -8,
+     "n": 200,
+     "ok": 32,
+     "rate": 0.16,
+     "ci95": [
+      0.1157,
+      0.2171
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 32
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.84,
+     "rawBer": 0.0771,
+     "rawBerP90": 0.0897,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 114,
+      "p95": 184
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -9,
+     "n": 200,
+     "ok": 5,
+     "rate": 0.025,
+     "ci95": [
+      0.0107,
+      0.0572
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 5
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.975,
+     "rawBer": 0.1109,
+     "rawBerP90": 0.1266,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 108,
+      "p95": 166
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -10,
+     "n": 200,
+     "ok": 0,
+     "rate": 0,
+     "ci95": [
+      0,
+      0.0188
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 0
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 1,
+     "rawBer": 0.1538,
+     "rawBerP90": 0.1742,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 107,
+      "p95": 157
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -12,
+     "n": 200,
+     "ok": 0,
+     "rate": 0,
+     "ci95": [
+      0,
+      0.0188
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 0
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 1,
+     "rawBer": 0.2421,
+     "rawBerP90": 0.2607,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 110,
+      "p95": 222
+     },
+     "airtimeS": 3.2274
+    }
+   ],
+   "limit90": -6.177777777777778,
+   "limit50": -7.081081081081082
+  },
+  {
+   "id": "babble",
+   "label": "Café babble",
+   "param": "in-band SNR",
+   "unit": "dB",
+   "worse": "down",
+   "note": "Six synthetic talkers, dish clinks and rumble, added acoustically (before the microphone).",
+   "steps": [
+    {
+     "value": 10,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 152,
+      "p95": 301
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 0,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 122,
+      "p95": 230
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -6,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0013,
+     "rawBerP90": 0.0033,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 120,
+      "p95": 273
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -12,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0091,
+     "rawBerP90": 0.0167,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 115,
+      "p95": 170
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -15,
+     "n": 200,
+     "ok": 198,
+     "rate": 0.99,
+     "ci95": [
+      0.9643,
+      0.9973
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 64
+      }
+     },
+     "cer": 0.01,
+     "rawBer": 0.0211,
+     "rawBerP90": 0.0348,
+     "syncRate": 0.995,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 117,
+      "p95": 173
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -18,
+     "n": 200,
+     "ok": 176,
+     "rate": 0.88,
+     "ci95": [
+      0.8277,
+      0.918
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 65
+      },
+      "64": {
+       "n": 67,
+       "ok": 65
+      },
+      "140": {
+       "n": 66,
+       "ok": 46
+      }
+     },
+     "cer": 0.12,
+     "rawBer": 0.0393,
+     "rawBerP90": 0.0562,
+     "syncRate": 0.99,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 118,
+      "p95": 174
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -21,
+     "n": 200,
+     "ok": 106,
+     "rate": 0.53,
+     "ci95": [
+      0.4609,
+      0.598
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 56
+      },
+      "64": {
+       "n": 67,
+       "ok": 47
+      },
+      "140": {
+       "n": 66,
+       "ok": 3
+      }
+     },
+     "cer": 0.47,
+     "rawBer": 0.0693,
+     "rawBerP90": 0.0986,
+     "syncRate": 0.935,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 113,
+      "p95": 181
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": -24,
+     "n": 200,
+     "ok": 51,
+     "rate": 0.255,
+     "ci95": [
+      0.1996,
+      0.3196
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 42
+      },
+      "64": {
+       "n": 67,
+       "ok": 9
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.745,
+     "rawBer": 0.107,
+     "rawBerP90": 0.1478,
+     "syncRate": 0.78,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 109,
+      "p95": 167
+     },
+     "airtimeS": 3.2274
+    }
+   ],
+   "limit90": -17.454545454545453,
+   "limit50": -21.327272727272728
+  },
+  {
+   "id": "distance",
+   "label": "Distance",
+   "param": "distance",
+   "unit": "m",
+   "worse": "up",
+   "note": "1/d spreading and a low-pass at 16 kHz/√d, against the fixed 30 dB (at 1 m) floor; free field.",
+   "steps": [
+    {
+     "value": 0.5,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 115,
+      "p95": 165
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 1,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 124,
+      "p95": 246
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 4,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 117,
+      "p95": 215
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 8,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 114,
+      "p95": 165
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 16,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0001,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 114,
+      "p95": 163
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 20,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0047,
+     "rawBerP90": 0.0076,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 114,
+      "p95": 174
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 24,
+     "n": 200,
+     "ok": 191,
+     "rate": 0.955,
+     "ci95": [
+      0.9167,
+      0.9761
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 57
+      }
+     },
+     "cer": 0.045,
+     "rawBer": 0.025,
+     "rawBerP90": 0.0327,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 117,
+      "p95": 169
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 28,
+     "n": 200,
+     "ok": 106,
+     "rate": 0.53,
+     "ci95": [
+      0.4609,
+      0.598
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 39
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.47,
+     "rawBer": 0.0594,
+     "rawBerP90": 0.0706,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 116,
+      "p95": 171
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 32,
+     "n": 200,
+     "ok": 67,
+     "rate": 0.335,
+     "ci95": [
+      0.2732,
+      0.403
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.665,
+     "rawBer": 0.0996,
+     "rawBerP90": 0.1124,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 117,
+      "p95": 165
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 40,
+     "n": 200,
+     "ok": 14,
+     "rate": 0.07,
+     "ci95": [
+      0.0422,
+      0.1141
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 14
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.93,
+     "rawBer": 0.1741,
+     "rawBerP90": 0.1894,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 108,
+      "p95": 165
+     },
+     "airtimeS": 3.2274
+    }
+   ],
+   "limit90": 24.517647058823528,
+   "limit50": 28.615384615384617
+  },
+  {
+   "id": "reverb",
+   "label": "Room reverb",
+   "param": "RT60",
+   "unit": "s",
+   "worse": "up",
+   "note": "Synthetic impulse response; DRR from Sabine (100 m³ room, phones 0.5 m apart).",
+   "steps": [
+    {
+     "value": 0.25,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0001,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 123,
+      "p95": 173
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 0.5,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0004,
+     "rawBerP90": 0.0015,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 132,
+      "p95": 193
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 1,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0033,
+     "rawBerP90": 0.0063,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 151,
+      "p95": 218
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 1.5,
+     "n": 200,
+     "ok": 198,
+     "rate": 0.99,
+     "ci95": [
+      0.9643,
+      0.9973
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 64
+      }
+     },
+     "cer": 0.01,
+     "rawBer": 0.0112,
+     "rawBerP90": 0.0171,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 168,
+      "p95": 234
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 2,
+     "n": 200,
+     "ok": 154,
+     "rate": 0.77,
+     "ci95": [
+      0.7069,
+      0.8229
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 63
+      },
+      "140": {
+       "n": 66,
+       "ok": 24
+      }
+     },
+     "cer": 0.23,
+     "rawBer": 0.0249,
+     "rawBerP90": 0.0344,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 185,
+      "p95": 256
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 2.5,
+     "n": 200,
+     "ok": 86,
+     "rate": 0.43,
+     "ci95": [
+      0.3633,
+      0.4993
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 66
+      },
+      "64": {
+       "n": 67,
+       "ok": 20
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.57,
+     "rawBer": 0.04,
+     "rawBerP90": 0.0533,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 183,
+      "p95": 267
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 3,
+     "n": 200,
+     "ok": 45,
+     "rate": 0.225,
+     "ci95": [
+      0.1726,
+      0.2877
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 45
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.775,
+     "rawBer": 0.0582,
+     "rawBerP90": 0.0706,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 186,
+      "p95": 251
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 4,
+     "n": 200,
+     "ok": 0,
+     "rate": 0,
+     "ci95": [
+      0,
+      0.0188
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 0
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 1,
+     "rawBer": 0.0908,
+     "rawBerP90": 0.1068,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 185,
+      "p95": 261
+     },
+     "airtimeS": 3.2274
+    }
+   ],
+   "limit90": 1.7045454545454546,
+   "limit50": 2.3970588235294117
+  },
+  {
+   "id": "mic",
+   "label": "Cheap microphone",
+   "param": "upper cut-off",
+   "unit": "Hz",
+   "worse": "down",
+   "note": "4th-order band-pass 300 Hz to the cut-off, +5 dB resonance at 0.75× cut-off.",
+   "steps": [
+    {
+     "value": 8000,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 112,
+      "p95": 183
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 5000,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 114,
+      "p95": 164
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 4000,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 110,
+      "p95": 163
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 3000,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 116,
+      "p95": 175
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 2500,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0002,
+     "rawBerP90": 0.0009,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 115,
+      "p95": 183
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 2000,
+     "n": 200,
+     "ok": 186,
+     "rate": 0.93,
+     "ci95": [
+      0.8859,
+      0.9578
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 52
+      }
+     },
+     "cer": 0.07,
+     "rawBer": 0.0281,
+     "rawBerP90": 0.0354,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 116,
+      "p95": 200
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 1750,
+     "n": 200,
+     "ok": 128,
+     "rate": 0.64,
+     "ci95": [
+      0.5714,
+      0.7033
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 61
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.36,
+     "rawBer": 0.0717,
+     "rawBerP90": 0.0822,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 115,
+      "p95": 216
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 1500,
+     "n": 200,
+     "ok": 67,
+     "rate": 0.335,
+     "ci95": [
+      0.2732,
+      0.403
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.665,
+     "rawBer": 0.1261,
+     "rawBerP90": 0.1389,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 139,
+      "p95": 220
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 1250,
+     "n": 200,
+     "ok": 67,
+     "rate": 0.335,
+     "ci95": [
+      0.2732,
+      0.403
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.665,
+     "rawBer": 0.1932,
+     "rawBerP90": 0.2073,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 135,
+      "p95": 213
+     },
+     "airtimeS": 3.2274
+    }
+   ],
+   "limit90": 1974.1379310344828,
+   "limit50": 1635.2459016393443
+  },
+  {
+   "id": "speaker",
+   "label": "Speaker nonlinearity",
+   "param": "drive",
+   "unit": "dB",
+   "worse": "up",
+   "note": "Asymmetric soft saturation (tanh + even-order term) and a 350 Hz high-pass.",
+   "steps": [
+    {
+     "value": 0,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 115,
+      "p95": 189
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 6,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 116,
+      "p95": 173
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 12,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 114,
+      "p95": 170
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 18,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 130,
+      "p95": 197
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 24,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 129,
+      "p95": 200
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 30,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0004,
+     "rawBerP90": 0.0015,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 125,
+      "p95": 202
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 40,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.002,
+     "rawBerP90": 0.0043,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 117,
+      "p95": 187
+     },
+     "airtimeS": 3.2274
+    }
+   ],
+   "limit90": null,
+   "limit50": null
+  },
+  {
+   "id": "clip",
+   "label": "Input clipping",
+   "param": "peak over full scale",
+   "unit": "dB",
+   "worse": "up",
+   "note": "Received peak this far above the ADC full scale, hard-clipped.",
+   "steps": [
+    {
+     "value": 0,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 114,
+      "p95": 168
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 6,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 119,
+      "p95": 177
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 12,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 129,
+      "p95": 210
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 20,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0012,
+     "rawBerP90": 0.003,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 124,
+      "p95": 213
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 30,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0024,
+     "rawBerP90": 0.0045,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 120,
+      "p95": 196
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 40,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0025,
+     "rawBerP90": 0.0046,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 119,
+      "p95": 173
+     },
+     "airtimeS": 3.2274
+    }
+   ],
+   "limit90": null,
+   "limit50": null
+  },
+  {
+   "id": "drift",
+   "label": "Clock drift",
+   "param": "|offset|",
+   "unit": "ppm",
+   "worse": "up",
+   "note": "Receiver sample clock off by ±ppm (sign random per message), plus a fractional start delay.",
+   "steps": [
+    {
+     "value": 0,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 112,
+      "p95": 165
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 100,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 116,
+      "p95": 182
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 300,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 115,
+      "p95": 167
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 600,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 119,
+      "p95": 176
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 1000,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 112,
+      "p95": 175
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 2000,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 116,
+      "p95": 173
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 4000,
+     "n": 200,
+     "ok": 63,
+     "rate": 0.315,
+     "ci95": [
+      0.2546,
+      0.3824
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 63
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.685,
+     "rawBer": 0.0624,
+     "rawBerP90": 0.0708,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 115,
+      "p95": 174
+     },
+     "airtimeS": 3.2274
+    }
+   ],
+   "limit90": 2291.970802919708,
+   "limit50": 3459.85401459854
+  },
+  {
+   "id": "late",
+   "label": "Late start",
+   "param": "preamble missed",
+   "unit": "ms",
+   "worse": "up",
+   "note": "The receiver starts recording this long after the 85 ms preamble began.",
+   "steps": [
+    {
+     "value": 0,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 115,
+      "p95": 177
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 1,
+     "n": 200,
+     "ok": 0,
+     "rate": 0,
+     "ci95": [
+      0,
+      0.0188
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 0
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 1,
+     "rawBer": null,
+     "rawBerP90": null,
+     "syncRate": null,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 86,
+      "p95": 132
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 5,
+     "n": 200,
+     "ok": 0,
+     "rate": 0,
+     "ci95": [
+      0,
+      0.0188
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 0
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 1,
+     "rawBer": null,
+     "rawBerP90": null,
+     "syncRate": null,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 86,
+      "p95": 133
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 20,
+     "n": 200,
+     "ok": 0,
+     "rate": 0,
+     "ci95": [
+      0,
+      0.0188
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 0
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 1,
+     "rawBer": null,
+     "rawBerP90": null,
+     "syncRate": null,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 86,
+      "p95": 135
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 40,
+     "n": 200,
+     "ok": 0,
+     "rate": 0,
+     "ci95": [
+      0,
+      0.0188
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 0
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 1,
+     "rawBer": null,
+     "rawBerP90": null,
+     "syncRate": null,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 85,
+      "p95": 142
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 80,
+     "n": 200,
+     "ok": 0,
+     "rate": 0,
+     "ci95": [
+      0,
+      0.0188
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 0
+      },
+      "64": {
+       "n": 67,
+       "ok": 0
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 1,
+     "rawBer": null,
+     "rawBerP90": null,
+     "syncRate": null,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 84,
+      "p95": 147
+     },
+     "airtimeS": 3.2274
+    }
+   ],
+   "limit90": 0.09999999999999998,
+   "limit50": 0.5
+  },
+  {
+   "id": "dropouts",
+   "label": "Dropouts",
+   "param": "rate",
+   "unit": "gaps/s",
+   "worse": "up",
+   "note": "Silent 5–40 ms gaps (audio glitches), Poisson-distributed.",
+   "steps": [
+    {
+     "value": 0,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0,
+     "rawBerP90": 0,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 118,
+      "p95": 181
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 1,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0084,
+     "rawBerP90": 0.0167,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 118,
+      "p95": 178
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 2,
+     "n": 200,
+     "ok": 200,
+     "rate": 1,
+     "ci95": [
+      0.9812,
+      1
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 66
+      }
+     },
+     "cer": 0,
+     "rawBer": 0.0155,
+     "rawBerP90": 0.0275,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 115,
+      "p95": 179
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 4,
+     "n": 200,
+     "ok": 197,
+     "rate": 0.985,
+     "ci95": [
+      0.9568,
+      0.9949
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 65
+      },
+      "64": {
+       "n": 67,
+       "ok": 67
+      },
+      "140": {
+       "n": 66,
+       "ok": 65
+      }
+     },
+     "cer": 0.015,
+     "rawBer": 0.0315,
+     "rawBerP90": 0.05,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 118,
+      "p95": 173
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 6,
+     "n": 200,
+     "ok": 179,
+     "rate": 0.895,
+     "ci95": [
+      0.8448,
+      0.9303
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 65
+      },
+      "140": {
+       "n": 66,
+       "ok": 47
+      }
+     },
+     "cer": 0.105,
+     "rawBer": 0.0507,
+     "rawBerP90": 0.0721,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 116,
+      "p95": 179
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 8,
+     "n": 200,
+     "ok": 143,
+     "rate": 0.715,
+     "ci95": [
+      0.6488,
+      0.7731
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 67
+      },
+      "64": {
+       "n": 67,
+       "ok": 61
+      },
+      "140": {
+       "n": 66,
+       "ok": 15
+      }
+     },
+     "cer": 0.285,
+     "rawBer": 0.0638,
+     "rawBerP90": 0.0847,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 115,
+      "p95": 180
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 10,
+     "n": 200,
+     "ok": 109,
+     "rate": 0.545,
+     "ci95": [
+      0.4758,
+      0.6125
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 66
+      },
+      "64": {
+       "n": 67,
+       "ok": 42
+      },
+      "140": {
+       "n": 66,
+       "ok": 1
+      }
+     },
+     "cer": 0.455,
+     "rawBer": 0.081,
+     "rawBerP90": 0.109,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 119,
+      "p95": 185
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 12,
+     "n": 200,
+     "ok": 92,
+     "rate": 0.46,
+     "ci95": [
+      0.3923,
+      0.5292
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 63
+      },
+      "64": {
+       "n": 67,
+       "ok": 29
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.54,
+     "rawBer": 0.0988,
+     "rawBerP90": 0.1327,
+     "syncRate": 0.995,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 122,
+      "p95": 201
+     },
+     "airtimeS": 3.2274
+    },
+    {
+     "value": 16,
+     "n": 200,
+     "ok": 49,
+     "rate": 0.245,
+     "ci95": [
+      0.1906,
+      0.309
+     ],
+     "byLength": {
+      "16": {
+       "n": 67,
+       "ok": 48
+      },
+      "64": {
+       "n": 67,
+       "ok": 1
+      },
+      "140": {
+       "n": 66,
+       "ok": 0
+      }
+     },
+     "cer": 0.755,
+     "rawBer": 0.1307,
+     "rawBerP90": 0.1629,
+     "syncRate": 1,
+     "wrong": 0,
+     "decodeMs": {
+      "median": 128,
+      "p95": 202
+     },
+     "airtimeS": 3.2274
+    }
+   ],
+   "limit90": 5.888888888888889,
+   "limit50": 11.058823529411764
+  }
+ ],
+ "scenarios": [
+  {
+   "id": "quiet",
+   "label": "Quiet office",
+   "note": "Two phones 1 m apart on a desk, RT60 0.4 s, quiet floor.",
+   "cond": {
+    "rt60": 0.4,
+    "distanceM": 1
+   },
+   "n": 200,
+   "ok": 177,
+   "rate": 0.885,
+   "ci95": [
+    0.8334,
+    0.9221
+   ],
+   "byLength": {
+    "16": {
+     "n": 67,
+     "ok": 66
+    },
+    "64": {
+     "n": 67,
+     "ok": 64
+    },
+    "140": {
+     "n": 66,
+     "ok": 47
+    }
+   },
+   "cer": 0.115,
+   "rawBer": 0.0194,
+   "rawBerP90": 0.0285,
+   "syncRate": 1,
+   "wrong": 0,
+   "decodeMs": {
+    "median": 131,
+    "p95": 185
+   },
+   "airtimeS": 3.2274
+  },
+  {
+   "id": "cafe",
+   "label": "Café table",
+   "note": "Café noise at +5 dB, RT60 0.8 s, 1 m, mid-range microphone, ±100 ppm.",
+   "cond": {
+    "babbleDb": 5,
+    "rt60": 0.8,
+    "distanceM": 1,
+    "micHiHz": 5000,
+    "ppm": 100
+   },
+   "n": 200,
+   "ok": 43,
+   "rate": 0.215,
+   "ci95": [
+    0.1637,
+    0.277
+   ],
+   "byLength": {
+    "16": {
+     "n": 67,
+     "ok": 40
+    },
+    "64": {
+     "n": 67,
+     "ok": 3
+    },
+    "140": {
+     "n": 66,
+     "ok": 0
+    }
+   },
+   "cer": 0.785,
+   "rawBer": 0.0502,
+   "rawBerP90": 0.0652,
+   "syncRate": 1,
+   "wrong": 0,
+   "decodeMs": {
+    "median": 146,
+    "p95": 214
+   },
+   "airtimeS": 3.2274
+  },
+  {
+   "id": "worst",
+   "label": "Worst realistic case",
+   "note": "Loud café (babble as loud as the phone), RT60 1.2 s, 2 m apart, 300–4000 Hz microphone with resonance, speaker driven 12 dB into saturation, input 6 dB over full scale, ±200 ppm, one dropout per second.",
+   "cond": {
+    "babbleDb": 0,
+    "rt60": 1.2,
+    "distanceM": 2,
+    "micHiHz": 4000,
+    "speakerDb": 12,
+    "clipDb": 6,
+    "ppm": 200,
+    "dropoutsPerS": 1
+   },
+   "n": 200,
+   "ok": 0,
+   "rate": 0,
+   "ci95": [
+    0,
+    0.0188
+   ],
+   "byLength": {
+    "16": {
+     "n": 67,
+     "ok": 0
+    },
+    "64": {
+     "n": 67,
+     "ok": 0
+    },
+    "140": {
+     "n": 66,
+     "ok": 0
+    }
+   },
+   "cer": 1,
+   "rawBer": 0.2556,
+   "rawBerP90": 0.2782,
+   "syncRate": 0.01,
+   "wrong": 0,
+   "decodeMs": {
+    "median": 142,
+    "p95": 196
+   },
+   "airtimeS": 3.2274
+  }
+ ],
+ "falseDetections": [
+  {
+   "id": "white",
+   "label": "White noise",
+   "cond": {
+    "awgnDb": 0
+   },
+   "seconds": 602,
+   "frames": 0,
+   "alarms": 1,
+   "alarmsPerMin": 0.1,
+   "decodeMsPerWindow": 332
+  },
+  {
+   "id": "babble",
+   "label": "Café babble",
+   "cond": {
+    "babbleDb": -6
+   },
+   "seconds": 602,
+   "frames": 0,
+   "alarms": 0,
+   "alarmsPerMin": 0,
+   "decodeMsPerWindow": 337
+  },
+  {
+   "id": "worst",
+   "label": "Worst-case chain, no signal",
+   "cond": {
+    "babbleDb": 0,
+    "micHiHz": 4000,
+    "clipDb": 6,
+    "dropoutsPerS": 1
+   },
+   "seconds": 602,
+   "frames": 0,
+   "alarms": 1,
+   "alarmsPerMin": 0.1,
+   "decodeMsPerWindow": 337
+  }
+ ]
+}

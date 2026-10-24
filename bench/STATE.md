@@ -1,4 +1,4 @@
 status: running
-updated: 2026-10-24T04:55:37Z
+updated: 2026-10-24T05:15:45Z
 rung: R0, R1 pass; full sweep running
-note: full N=200 sweep running; CI workflow written; ablations next
+note: full sweep done (results/06ca291.json); ablations running; write-up next
