@@ -1,0 +1,4 @@
+results/.partial-*
+results/*-dirty*.json
+results/*.tmp
+site/out/

@@ -50,21 +50,22 @@ export function addAtSnr(s: Float32Array, noise: Float32Array, refPower: number,
 
 // ---------------------------------------------------------------- speaker
 /**
- * Small phone speaker driven hard: asymmetric soft saturation tanh(g·x) with a second-order
+ * Small phone speaker driven hard: asymmetric soft saturation tanh(k·x) with a second-order
  * term (even harmonics), then the speaker's low-frequency limit (high-pass 350 Hz). Output RMS
  * is matched to the input, so only the waveform changes, not the level.
  */
 export function speakerNL(x: Float32Array, driveDb: number): Float32Array {
-  const g = Math.pow(10, driveDb / 20);
-  const tg = Math.tanh(g);
+  // drive 0 dB is a gentle k = 0.3 (THD < 1 % at full scale); every 6 dB doubles it
+  const k = 0.3 * Math.pow(10, driveDb / 20);
+  const asym = 0.15 * Math.min(1, k / 3);
   const y = new Float32Array(x.length);
   for (let i = 0; i < x.length; i++) {
-    const t = Math.tanh(g * x[i]!) / tg;
-    y[i] = t + 0.12 * (1 - 1 / g) * t * t;
+    const t = Math.tanh(k * x[i]!);
+    y[i] = t + asym * t * t;
   }
   const z = filter(y, butterHigh(FS, 350, 2));
-  const k = Math.sqrt(power(x) / Math.max(power(z), 1e-30));
-  for (let i = 0; i < z.length; i++) z[i]! *= k;
+  const g = Math.sqrt(power(x) / Math.max(power(z), 1e-30));
+  for (let i = 0; i < z.length; i++) z[i]! *= g;
   return z;
 }
 
